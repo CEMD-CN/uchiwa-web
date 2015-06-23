@@ -6,9 +6,9 @@ directiveModule.directive('panelActions', ['$rootScope', function ($rootScope) {
   return {
     restrict: 'E',
     scope: {
-      data: '=',
+      data: '=',// this is two directional binding
       resolveFn: '=',
-      resolveLegend: '@',
+      resolveLegend: '@',// refer the value from html element's attribute
       silenceFn: '='
     },
     templateUrl: $rootScope.partialsPath + '/panel/actions.html'
@@ -63,9 +63,9 @@ directiveModule.directive('siteTheme', ['conf', '$cookieStore', '$rootScope', fu
         $cookieStore.put('uchiwa_theme', name);
 
         var path = enterprise ? 'css/' : 'bower_components/uchiwa-web/css/';
-        element.attr('href', path + name + '/' + name + '.css');
+        element.attr('href', path + name + '/' + name + '.css');//change the href value directly
       };
-      scope.$on('theme:changed', function (event, theme) {
+      scope.$on('theme:changed', function (event, theme) { // add the callback function to listen the them change event
         setTheme(theme.name);
       });
       var currentTheme = $cookieStore.get('uchiwa_theme');
